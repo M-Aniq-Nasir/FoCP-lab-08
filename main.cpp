@@ -87,19 +87,19 @@ void weapon(){
     string y;
     switch(x){
         case 1 :{
-            y="Torn Rope";
+            y="Torn Rope";break;
         }
         case 2 :{
-            y="Wrench";
+            y="Wrench";break;
         }
         case 3 :{
-            y="Gun";
+            y="Gun";break;
         }
         case 4 :{
-            y="Knife";
+            y="Knife";break;
         }
         case 5 :{
-            y="Crowbar";
+            y="Crowbar";break;
         }
 
     }
@@ -129,13 +129,13 @@ void selection() {
 		else if (select == 4) {
 			cout << "You have chosen to exit program.\nExiting Program....";
 			this_thread::sleep_for(chrono::milliseconds(100));
-			exit(0);
+			break;
 		}
 		else {
 			cout << "\nInvalid input. Please input correct integer as according to numbering.";
 		}
     }
-	while (select<1);
+	while (select<=5);
 }
 
 //used to display basic about us
@@ -169,4 +169,5 @@ void energy_suspect(int &x){
     cout<<"Beware, Low Energy!\t Your Energy Left is: " << x<<"%\n";
     else
     exit(0);
+
 }
