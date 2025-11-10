@@ -72,6 +72,8 @@ void typeText(const string message, int delay_ms) {
 		this_thread::sleep_for(chrono::milliseconds(delay_ms));
 	}
 }
+
+//This function is used for user to select what they would like to do from the interface
 void selection() {
 	int select;
 	while (true) {
@@ -97,11 +99,15 @@ void selection() {
 	
 	}
 }
+
+//used to display basic about us
 void about_us() {
 	cout << "\nThis game (The Mystery of Elderwood Manor.) has been developed by us(group of 3).This game is a \nmurder mystery game revolving around murder of Evan Eldenwood.";
 	cout << "\nThrough this game,we challenge your wits and your ability to piece together clues which ultimately \nleads to a the mastermind behind this murder.";
 	cout << "\nDetective! We wish you luck in finding the true mastermind.\nNow lets dive into The Mystery of The Eldenwood Manor.\n\n";
 }
+
+//used for guiding the player how to play
 void how_to_play() {
 	cout << "\nTo play this game, whenever you are asked something write the number of the command you want to \nexecute, as will be given with every command.It's this simple.Now have fun.\n";
 }
