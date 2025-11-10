@@ -14,6 +14,8 @@ void how_to_play();
 void about_us();
 int murderer();
 void selection();
+void suspects();
+void locations();
 
 int main() {
 	srand(time(0));
@@ -24,7 +26,7 @@ int main() {
 	return 0;
 }
 
-//This Function is for just thr initial interface.
+//This Function is for just the initial interface.
 void interface() {
 	cout << setw(80) << "---------Welcome to The Eldenwood Mansion--------\n\n\n";
 	cout << setw(60) << "1. How to play?\n\n";
@@ -110,4 +112,35 @@ void about_us() {
 //used for guiding the player how to play
 void how_to_play() {
 	cout << "\nTo play this game, whenever you are asked something write the number of the command you want to \nexecute, as will be given with every command.It's this simple.Now have fun.\n";
+}
+
+//used for displaying brief introduction of suspects
+void suspects() {
+	cout << "\nMurderer is among these ten suspects:\n";
+	cout << "-----------------------------------------------\n";
+	cout << "1. Henry (Butler) -Served the family for 40 years, but the victim planned to dismiss him with no pension due to allegations of stealing.\n";
+	cout << "2. Regina (Maid) - Evan didn't gave any job to her husband who committed suicide.\n";
+	cout << "3. Arthur (Chef) - Evan always made racist remarks about his black colour.\n";
+	cout << "5. Victor Eldenwood (Brother of victim) - A drug addict who hates Evan because their parents always showed more care towards Evan.\n";
+	cout << "7. Felix (Guest) - An old rival invited to solve the past disputes by Evan.\n";
+	cout << "8. Edward (Gardener) - Was once forced by Evan to bury an unknown dead body.\n";
+	cout << "9. Martha Elderwood (Sister of victim) - Was continuosly deprived of her share in propety by Evan.\n";
+	cout << "10. Brad (Brother-in-Law of victim) - Had many fights with Evan due to his bad behaviour with wife Martha.\n";
+	cout << "6. Thomas (PA of victim) - Secretly loved Evan's sister and became furious due to Evan's wicked behaviour with her.\n";
+	cout << "4. Samuel (Driver) - Was of idea that deserving lord of manor should be Brad.\n";
+	cout << "-----------------------------------------------\n\n";
+}
+
+//Displays available locations for investigation
+void locations() {
+	cout << "\nInvestigate in the following locations:\n";
+	cout << "------------------------------------------------------------\n";
+	cout << "1.Dining Room\n";
+	cout << "2.Hall\n";
+	cout << "3.Bedroom\n";
+	cout << "4.Garage\n";
+	cout << "5.Kitchen\n";
+	cout << "6.Library\n";
+	cout << "7.Lounge\n";
+	cout << "------------------------------------------------------------\n\n";
 }
