@@ -9,22 +9,37 @@
 using namespace std;
 //All the functions used.Details about their function is written above their definitions
 void typetext(string, int x = 50 +rand()%10 );
+
+//Interface
 void interface();
 void how_to_play();
 void about_us();
-int murderer();
-void selection();
-void suspects();
-void locations();
-void weapon();
+int location_visit();
+
+//charcter selection and story start
+void game_start();
+void suspects_print();
+void locations_print();
+int weapon();
+
+//storyline flow
+int char_weapon_link(int);
+int loc_weapon_link(int);
+void clue_loc(int,int,int);
+int sus_interrogate(int);
+
+//energy calculation
 void energy_location(int &);
 void energy_suspect(int &);
 
+inline int randomizer(int start, int steps) { int random_int = start + rand() % steps; return random_int; }
+
+//main function
 int main() {
+
 	srand(time(0));
-	murderer();
 	interface();
-	selection();
+	game_start();
 	
 	return 0;
 }
@@ -38,35 +53,6 @@ void interface() {
 	cout << setw(59) << "4. Exit Game.\n\n\n";
 }
 
-//This function selects the murderer.
-int murderer() {
-	int sus_select = 1 + rand() % 10;
-	switch (sus_select) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	case 4:
-		break;
-	case 5:
-		break;
-	case 6:
-		break;
-	case 7:
-		break;
-	case 8:
-		break;
-	case 9:
-		break;
-	case 10:
-		break;
-	default:
-		cout << "Error.No Murderer selected.";
-	}
-	return sus_select;
-}
 
 //This function will be used with every text after the start of the game to make it look like typing animation
 //Please Enter Everything as Strings and keep in mind the width of string
@@ -79,7 +65,7 @@ void typetext(const string message, int delay_ms ) {
 }
 
 //This function is used for user to select what they would like to do from the interface
-void selection() {
+void game_start() {
 	int select;
 	while (true) {
 		cout << "For selection, Enter Integer(1-4) as numbered above.\nWhat would you like to do?\n";
@@ -90,7 +76,8 @@ void selection() {
 		else if (select == 2) {
 			string intro = "Evan Eldenwood was found dead in his Manor.He was brutally murdered.""Detective! Investigate the following suspects.";
 			typetext(intro, 50 + rand() % 10);
-			suspects();
+			suspects_print();
+			break;
 		}
 		else if (select == 3) {
 			about_us();
@@ -119,25 +106,93 @@ void how_to_play() {
 	cout << "\nTo play this game, whenever you are asked something write the number of the command you want to \nexecute, as will be given with every command.It's this simple.Now have fun.\n";
 }
 
+
 //used for displaying brief introduction of suspects
-void suspects() {
+void suspects_print() {
 	cout << "\n----------------------------------------------- \n";
 	string suspects = "\nMurderer is among these ten suspects:\n"
 		"1. Henry (Butler) -Served the family for 40 years, but the victim planned to dismiss him with no pension due to allegations of stealing.\n"
 		"2. Regina (Maid) - Evan didn't gave any job to her husband who committed suicide.\n"
 		"3. Arthur (Chef) - Evan always made racist remarks about his black colour.\n"
 		"4. Samuel (Driver) - Was of idea that deserving lord of manor should be Brad.\n"
-		"5. Victor Eldenwood (Brother of victim) - A drug addict who hates Evan because their parents always showed more care towards Evan.\n"
-		"6. Thomas (PA of victim) - Secretly loved Evan's sister and became furious due to Evan's wicked behaviour with her.\n"
+		"5. Edward (Gardener) - Was once forced by Evan to bury an unknown dead body.\n"
+		"6. Victor Eldenwood (Brother of victim) - A drug addict who hates Evan because their parents always showed more care towards Evan and gave Evan all of their wealth.\n"
 		"7. Felix (Guest) - An old rival invited to solve the past disputes by Evan.\n"
-		"8. Edward (Gardener) - Was once forced by Evan to bury an unknown dead body.\n"
-		"9. Martha Elderwood (Sister of victim) - Was continuosly deprived of her share in propety by Evan.\n"
+		"8. Martha Elderwood (Sister of victim) - Was continuosly deprived of her share in propety by Evan.\n"
+		"9. Thomas (PA of victim) - Secretly loved Evan's sister and became furious due to Evan's wicked behaviour with her.\n"
 		"10. Brad (Brother-in-Law of victim) - Had many fights with Evan due to his bad behaviour with wife Martha.\n";
 	typetext(suspects, 60 + rand() % 10);
 	cout<<"-----------------------------------------------\n\n";
 }
+
 //Displays available locations for investigation
-void locations() {
+int weapon(){
+    int x = 1+rand() % 5;
+    string weapon;
+
+	switch (x) {
+	case 1: {
+		weapon = "Knife"; break;
+	}
+	case 2: {
+		weapon = "Wrench"; break;
+	}
+	case 3: {
+		weapon = "Crowbar"; break;
+	}
+	case 4: {
+		weapon = "Gun"; break;
+	}
+	case 5: {
+		weapon = "Torn Rope"; break;
+	}
+	default:
+		cout << "value error";
+		return 0;
+	}
+	string weapon_print = "The weapon found at the location of murder was: ";
+	typetext(weapon_print);
+	typetext(weapon);
+	
+	return x;
+}
+
+
+int char_weapon_link(int weapon) {
+	int i, murderer;
+	if (weapon == 1) {
+		int murderers[4] = { 1,2,3,8 };
+		i = randomizer(0, 4);
+		murderer = murderers[i];
+	}
+	else if (weapon == 2) {
+		i = randomizer(0, 3);
+		int murderers[3] = {4,5,10};
+		murderer = murderers[i];
+	}
+	else if (weapon == 3) {
+		i = randomizer(0, 4);
+		int murderers[4] = {1,2,4,5};
+		murderer = murderers[i];
+	}
+	else if (weapon == 4) {
+		i = randomizer(0, 2);
+		int murderers[3] = { 6,9,7 };
+		murderer = murderers[i];
+	}
+	else if (weapon == 5) {
+		i = randomizer(0, 10);
+		int murderers[10] = { 1,2,3,4,5,6,7,8,9, 10 };
+		murderer = murderers[i];
+	}
+	else {
+		cout << "Linkage Error.";
+		return 0;
+	}
+	return murderer;
+}
+
+void locations_print() {
 	string loc = "\nInvestigate in the following locations:\n";
 	typetext(loc);
 	cout << "------------------------------------------------------------\n";
@@ -158,8 +213,10 @@ void energy_location(int &x){
     cout<<"Your Energy Left is: " << x<<"%\n";
     else if (x>0)
     cout<<"Beware, Low Energy!\t Your Energy Left is: " << x<<"%\n";
-    else
-    exit(0); //Terminate the program immediately
+	else {
+		cout << "You are out of energy, you have to make the guess";
+		exit(0);
+	} //Terminate the program immediately
 }
 
 void energy_suspect(int &x){
@@ -168,12 +225,14 @@ void energy_suspect(int &x){
     cout<<"Your Energy Left is: " << x<<"%\n";
     else if (x>0)
     cout<<"Beware, Low Energy!\t Your Energy Left is: " << x<<"%\n";
-    else
-    exit(0);
+	else {
+		cout << "You are out of energy, you have to make the guess";
+		exit(0);
+	}
 }
 
 //This function handles location selection and investigation
-int murder_location(int murder_num) {
+int location_visit() {
 
 	//Variables for all locations in sequence
 	string dining_room = "Dining Room";
@@ -187,7 +246,7 @@ int murder_location(int murder_num) {
 	int location_choice;
 
 	//Display available locations to user in sequence
-	locations();
+	locations_print();
 
 	//Get user input
 	cout << "Enter the location number you want to investigate (1-7): ";
@@ -204,31 +263,32 @@ int murder_location(int murder_num) {
 	switch(location_choice) {
 	case 1:
 		typetext(loc1);
+		return 1;
 		break;
 
 	case 2:
 		typetext(loc2);
-		break;
+		return 2;
 
 	case 3:
 		typetext(loc3);
-		break;
+		return 3;
 
 	case 4:
 		typetext(loc4);
-		break;
+		return 4;
 
 	case 5:
 		typetext( loc5);
-		break;
+		return 5;
 
 	case 6:
 		typetext( loc6);
-		break;
+		return 6;
 
 	case 7:
 		typetext( loc7);
-		break;
+		return 7;
 
 	default:
 		cout << "Invalid location number. Please enter a number between 1-7.\n";
@@ -237,26 +297,71 @@ int murder_location(int murder_num) {
 	return location_choice;
 }
 
-void weapon(){
-    int x = 1+rand() % 5;
-    string y;
-    switch(x){
-        case 1 :{
-            y="Torn Rope";break;
-        }
-        case 2 :{
-            y="Wrench";break;
-        }
-        case 3 :{
-            y="Gun";break;
-        }
-        case 4 :{
-            y="Knife";break;
-        }
-        case 5 :{
-            y="Crowbar";break;
-        }
 
-    }
-    cout<<"The weapon found at the location of murder was: "<<y<<endl;
+int loc_weapon_link(int weapon) {
+	int i,loc=4;
+	if (weapon == 1) {
+		int locations[3] = { 1,3,5};
+		i = randomizer(0, 4);
+		loc = locations[i];
+	}
+	else if (weapon == 2) {
+		
+		loc = 4;
+	}
+	else if (weapon == 3) {
+		i = randomizer(0, 2);
+		int locations[2] = { 2,4 };
+		loc = locations[i];
+	}
+	else if (weapon == 4) {
+		i = randomizer(0, 4);
+		int locations[4] = { 1,3,6,7};
+		loc = locations[i];
+	}
+	else if (weapon == 5) {
+		i = randomizer(0, 7);
+		int locations[7] = { 1,2,3,4,5,6,7};
+		loc = locations[i];
+	}
+	else {
+		cout << "Linkage Error.";
+		system("pause");
+	}
+	return loc;
+}
+void clue_loc(int location,int loc_murder,int weapon) {
+	if (location == loc_murder) {
+		string message = "This seems to be the murder location.....\n..here,look! there is a ";
+		string weapon_print;
+		if (weapon == 1) string weapon_print = "Knife";
+		if (weapon == 2) string weapon_print = "Wrench";
+		if (weapon == 2) string weapon_print = "Crowbar";
+		if (weapon == 2) string weapon_print = "Gun";
+		if (weapon == 2) string weapon_print = "Torn rope";
+		typetext(message);
+		typetext(weapon_print);
+		typetext(" on the ground,\nthe killer must have panicked,otherwise he would'nt have left it in the open.\nHe hid the body but couldn't hide the weapon in the time");
+	}
+	else {
+		string no_clue = "You found no clue.\nHmm...You should go and check other locations,maybe there is something there.";
+		typetext(no_clue);
+	}
+}
+
+int sus_interrogate(int murderer) {
+	int user_input = 0;
+	typetext( "Which one would you like to interrogate first?\n");
+	typetext("1. Henry(Butler) \n"
+		"2. Regina (Maid)\n"
+		"3. Arthur (Chef) \n"
+		"4. Samuel (Driver)\n"
+		"5. Edward (Gardener) \n"
+		"6. Victor Eldenwood(Brother of victim) \n"
+		"7. Felix (Guest) \n"
+		"8. Martha Elderwood (Sister of victim)\n"
+		"9. Thomas (PA of victim)\n"
+		"10. Brad (Brother-in-Law of victim) ");
+	cin >> user_input;
+	return user_input;
 }
