@@ -14,6 +14,7 @@ void typetext(string, int x = 50 +rand()%10 );
 void interface();
 void how_to_play();
 void about_us();
+int choose();
 int location_visit();
 
 //charcter selection and story start
@@ -26,7 +27,9 @@ int weapon();
 int char_weapon_link(int);
 int loc_weapon_link(int);
 void clue_loc(int,int,int);
-int sus_interrogate(int);
+int sus_interrogate();
+void clue_sus(int,int);
+void user_guess(int);
 
 //energy calculation
 void energy_location(int &);
@@ -36,11 +39,31 @@ inline int randomizer(int start, int steps) { int random_int = start + rand() % 
 
 //main function
 int main() {
-
 	srand(time(0));
+
+	int murder_weapon = 0, loc=0, murder_loc=0, choice, energy=100, choice_sus=0, murderer = 0;
+
 	interface();
 	game_start();
-	
+	murder_weapon = weapon();
+	murder_loc = loc_weapon_link(murder_weapon);
+	murderer = char_weapon_link(murder_weapon);
+	while (true) {
+		choice = choose();
+		if (choice == 1) {
+			loc = location_visit();
+			clue_loc(loc, murder_loc, murder_weapon);
+			energy_location(energy);
+		}
+		else if (choice == 2) {
+			clue_sus(murderer,murder_weapon);
+		}
+		else if (choice == 3) {
+			user_guess(murderer);
+			return 0;
+		}
+		else cout << "Invalid input.Please enter correct values.\n";
+	}
 	return 0;
 }
 
@@ -53,6 +76,12 @@ void interface() {
 	cout << setw(59) << "4. Exit Game.\n\n\n";
 }
 
+int choose() {
+	int choice = 0;
+	typetext( "What would you like to investigate ?\n1.Locations\n2.Suspects\n3.Finish Investigation \n\n");
+	cin >> choice;
+	return choice;
+}
 
 //This function will be used with every text after the start of the game to make it look like typing animation
 //Please Enter Everything as Strings and keep in mind the width of string
@@ -74,7 +103,7 @@ void game_start() {
 			how_to_play();
 		}
 		else if (select == 2) {
-			string intro = "Evan Eldenwood was found dead in his Manor.He was brutally murdered.""Detective! Investigate the following suspects.";
+			string intro = "Evan Eldenwood was found dead in his Manor.He was brutally murdered.\nWe recieved Evan's call just before his murder,but sadly he couldnt tell us anything else and was murdered.\nDetective! Investigate the following suspects.\n\n";
 			typetext(intro, 50 + rand() % 10);
 			suspects_print();
 			break;
@@ -112,7 +141,7 @@ void suspects_print() {
 	cout << "\n----------------------------------------------- \n";
 	string suspects = "\nMurderer is among these ten suspects:\n"
 		"1. Henry (Butler) -Served the family for 40 years, but the victim planned to dismiss him with no pension due to allegations of stealing.\n"
-		"2. Regina (Maid) - Evan didn't gave any job to her husband who committed suicide.\n"
+		"2. Regina (Maid) - Evan didn't give job to her husband who committed suicide.\n"
 		"3. Arthur (Chef) - Evan always made racist remarks about his black colour.\n"
 		"4. Samuel (Driver) - Was of idea that deserving lord of manor should be Brad.\n"
 		"5. Edward (Gardener) - Was once forced by Evan to bury an unknown dead body.\n"
@@ -121,11 +150,11 @@ void suspects_print() {
 		"8. Martha Elderwood (Sister of victim) - Was continuosly deprived of her share in propety by Evan.\n"
 		"9. Thomas (PA of victim) - Secretly loved Evan's sister and became furious due to Evan's wicked behaviour with her.\n"
 		"10. Brad (Brother-in-Law of victim) - Had many fights with Evan due to his bad behaviour with wife Martha.\n";
-	typetext(suspects, 60 + rand() % 10);
+	typetext(suspects, 40 + rand() % 10);
 	cout<<"-----------------------------------------------\n\n";
 }
 
-//Displays available locations for investigation
+
 int weapon(){
     int x = 1+rand() % 5;
     string weapon;
@@ -150,9 +179,9 @@ int weapon(){
 		cout << "value error";
 		return 0;
 	}
-	string weapon_print = "The weapon found at the location of murder was: ";
+	/*string weapon_print = "The weapon found at the location of murder was: ";
 	typetext(weapon_print);
-	typetext(weapon);
+	typetext(weapon);*/
 	
 	return x;
 }
@@ -172,7 +201,7 @@ int char_weapon_link(int weapon) {
 	}
 	else if (weapon == 3) {
 		i = randomizer(0, 4);
-		int murderers[4] = {1,2,4,5};
+		int murderers[4] = {1,6,4,5};
 		murderer = murderers[i];
 	}
 	else if (weapon == 4) {
@@ -330,6 +359,7 @@ int loc_weapon_link(int weapon) {
 	}
 	return loc;
 }
+
 void clue_loc(int location,int loc_murder,int weapon) {
 	if (location == loc_murder) {
 		string message = "This seems to be the murder location.....\n..here,look! there is a ";
@@ -344,12 +374,12 @@ void clue_loc(int location,int loc_murder,int weapon) {
 		typetext(" on the ground,\nthe killer must have panicked,otherwise he would'nt have left it in the open.\nHe hid the body but couldn't hide the weapon in the time");
 	}
 	else {
-		string no_clue = "You found no clue.\nHmm...You should go and check other locations,maybe there is something there.";
+		string no_clue = "You found no clue.\nHmm...You should go and check other locations,maybe there is something there.\n\n";
 		typetext(no_clue);
 	}
 }
 
-int sus_interrogate(int murderer) {
+int sus_interrogate() {
 	int user_input = 0;
 	typetext( "Which one would you like to interrogate first?\n");
 	typetext("1. Henry(Butler) \n"
@@ -361,7 +391,154 @@ int sus_interrogate(int murderer) {
 		"7. Felix (Guest) \n"
 		"8. Martha Elderwood (Sister of victim)\n"
 		"9. Thomas (PA of victim)\n"
-		"10. Brad (Brother-in-Law of victim) ");
+		"10. Brad (Brother-in-Law of victim) \n\n");
 	cin >> user_input;
 	return user_input;
+}
+
+void clue_sus(int murderer,int weapon) {
+	while (true) {
+		int suspect = sus_interrogate();
+		if (suspect == 1) {
+			if (suspect == murderer) {
+				if(weapon == 1)typetext("");
+				if (weapon == 3)typetext("");
+				if (weapon == 5)typetext("");
+			}
+			else {
+				typetext("");
+			}
+
+		}
+		else if (suspect == 2) {
+			if (suspect == murderer) {
+				if (weapon == 1)typetext("");
+				if (weapon == 3)typetext("");
+				if (weapon == 5)typetext("");
+			}
+			
+			else {
+				typetext("");
+			}
+		}
+		else if (suspect == 3) {
+			if (suspect == murderer) {
+				if (weapon == 1)typetext("");
+				if (weapon == 3)typetext("");
+				if (weapon == 5)typetext("");
+			
+			}
+			else {
+				typetext("");
+			}
+		}
+		else if (suspect == 4) {
+			if (suspect == murderer) {
+				if (weapon == 1)typetext("");
+				if (weapon == 3)typetext("");
+				if (weapon == 5)typetext("");
+			}
+			
+			else {
+				typetext("");
+			}
+		}
+		else if (suspect == 5) {
+			if (suspect == murderer) {
+				if (weapon == 1)typetext("");
+				if (weapon == 3)typetext("");
+				if (weapon == 5)typetext("");
+			}
+			
+			else {
+				typetext("");
+			}
+		}
+		else if (suspect == 6) {
+			if (suspect == murderer) {
+				if (weapon == 1)typetext("");
+				if (weapon == 3)typetext("");
+				if (weapon == 5)typetext("");
+			}
+			
+			else {
+				typetext("");
+			}
+		}
+		else if (suspect == 7) {
+			if (suspect == murderer) {
+				if (weapon == 1)typetext("");
+				if (weapon == 3)typetext("");
+				if (weapon == 5)typetext("");
+			
+			}
+			else {
+				typetext("");
+			}
+		}
+		else if (suspect == 8) {
+			if (suspect == murderer) {
+				if (weapon == 1)typetext("");
+				if (weapon == 3)typetext("");
+				if (weapon == 5)typetext("");
+			}
+			
+			else {
+				typetext("");
+			}
+		}
+		else if (suspect == 9) {
+			if (suspect == murderer) {
+				if (weapon == 1)typetext("");
+				if (weapon == 3)typetext("");
+				if (weapon == 5)typetext("");
+			}
+			
+			else {
+				typetext("");
+			}
+		}
+		else if (suspect == 10) {
+			if (suspect == murderer) {
+				if (weapon == 1)typetext("");
+				if (weapon == 3)typetext("");
+				if (weapon == 5)typetext("");
+			
+			}
+			else {
+				typetext("");
+			}
+		}
+		else {
+			cout << "Invalid input.Please Enter correctly";
+		}
+	}
+}
+
+void user_guess(int murderer) {
+	int guess = 0;
+	typetext("So Detective,You have found out the murderer. Who do you think is the murderer? \n");
+	typetext("1. Henry(Butler) \n"
+		"2. Regina (Maid)\n"
+		"3. Arthur (Chef) \n"
+		"4. Samuel (Driver)\n"
+		"5. Edward (Gardener) \n"
+		"6. Victor Eldenwood(Brother of victim) \n"
+		"7. Felix (Guest) \n"
+		"8. Martha Elderwood (Sister of victim)\n"
+		"9. Thomas (PA of victim)\n"
+		"10. Brad (Brother-in-Law of victim) \n\n");
+	cin >> guess;
+	if (guess == murderer) {
+		typetext("Head Detective: As i thought, you are an excellent detective, you managed to figured out the true murderer.\n                Congratulations You passed our test.You didnt disappoint me.\n");
+		typetext("You: What are you saying......this was ...a test.\n");
+		typetext("Head Detective: Yes, This was a test, we are elite detectives.We are always in desperate need of people with your skills.\n");
+		typetext("You: So... All of this was fake....is Evan even dead.\n");
+		typetext("Head Detective: Yes, Evan did die... but 5 months ago. We staged this scene exactly as it was.\n               Just so you know Before you, five people failed this.So, from now on you are one of us.");
+		typetext("\n                By the way,just so you know you cannot refuse, you are already too deep into it.");
+	}
+	else if (guess >= 1 && guess <= 10) {
+		typetext("You were wrong.");
+	}
+
 }
