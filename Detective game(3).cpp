@@ -61,6 +61,7 @@ int main() {
 			}
 			else if (choice == 2) {
 				clue_sus(murderer, murder_weapon);
+				energy_suspect(energy);
 			}
 			else if (choice == 3 || energy < 5) {
 				if (energy < 5)typetext("Detective, it looks like you ran out of energy, now decide who the murderer is...\n\n");
