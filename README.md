@@ -89,7 +89,7 @@
 
 ###### You lose if:
 
-1. ###### Your energy reaches 0% before solving the case
+1. ###### Your energy reaches 0% and without preparation you will be forced to accuse the suspect
 2. ###### You accuse the wrong suspect
 
 
