@@ -46,6 +46,7 @@ int main() {
 	while (true) {
 		interface();
 		game_start();
+		energy = 100;
 		murder_weapon = weapon();
 		murder_loc = loc_weapon_link(murder_weapon);
 		murderer = char_weapon_link(murder_weapon);
@@ -611,5 +612,6 @@ bool exit_game() {
 	return false;
 
 }
+
 
 
