@@ -306,7 +306,7 @@ void energy_suspect(int &x){
     cout<<"Beware, Low Energy!\t Your Energy Left is: " << x<<"%\n";
 	else {
 		cout << "You are out of energy, you have to make the guess";
-		exit(0);
+		
 	}
 }
 
@@ -581,11 +581,11 @@ void user_guess(int murderer) {
 		typetext("You: What are you saying......this was ...a test.\n");
 		typetext("Head Detective: Yes, This was a test, we are elite detectives.We are always in desperate need of people with your skills.\n");
 		typetext("You: So... All of this was fake....is Evan even dead.\n");
-		typetext("Head Detective: Yes, Evan did die... but 5 months ago. We staged this scene exactly as it was.\n               Just so you know Before you, five people failed this.So, from now on you are one of us.");
-		typetext("\n                By the way,just so you know you cannot refuse, you are already too deep into it.");
+		typetext("Head Detective: Yes, Evan did die... but 5 months ago. We staged this scene exactly as it was.\n\tJust so you know Before you, five people failed this.So, from now on you are one of us.");
+		typetext("\n\tBy the way,just so you know you cannot refuse, you are already too deep into it.");
 	}
 	else if (guess >= 1 && guess <= 10) {
-		typetext("You were wrong.");
+		typetext("You were wrong.Looks like I was wrong, you are still not ready for the real world of mysteries.");
 	}
 
 }
@@ -611,4 +611,5 @@ bool exit_game() {
 	return false;
 
 }
+
 
