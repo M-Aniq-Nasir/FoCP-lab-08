@@ -595,7 +595,7 @@ bool exit_game() {
 	while(true){
 		cout << "\n----------------------------------------------- \n";
 		cout << setw(30) << "1. Play again.\n\n";
-		cout << setw(29) << "2. Exit Game.\n";
+		cout << setw(28) << "2. Exit Game.\n";
 		cout << "\n----------------------------------------------- \n";
 		cin >> choice;
 		if (choice == 2) {
@@ -611,3 +611,4 @@ bool exit_game() {
 	return false;
 
 }
+
