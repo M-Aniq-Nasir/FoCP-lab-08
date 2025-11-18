@@ -70,6 +70,7 @@ int main() {
 				if (exit_game()) {
 					return 0;
 				}
+				else break;
 			}
 			else cout << "Invalid input.Please enter correct values.\n";
 
@@ -591,7 +592,7 @@ void user_guess(int murderer) {
 
 bool exit_game() {
 	int choice = 0;
-	while (true) {
+	
 		cout << "\n----------------------------------------------- \n";
 		cout << setw(30) << "1. Play again.\n\n";
 		cout << setw(29) << "2. Exit Game.\n";
@@ -602,7 +603,7 @@ bool exit_game() {
 		}
 		else if (choice != 1) {
 			cout << "\nInvalid input.Please input correctly.\n";
-		}
+
 	}
 	return false;
 }
