@@ -54,12 +54,12 @@ int main() {
 			cout << energy << "\n\n";
 			choice = choose();
 
-			if (choice == 1) {
+			if (choice == 1 && energy >= 5) {
 				loc = location_visit();
 				clue_loc(loc, murder_loc, murder_weapon);
 				energy_location(energy);
 			}
-			else if (choice == 2) {
+			else if (choice == 2 && energy >= 5) {
 				clue_sus(murderer, murder_weapon);
 				energy_suspect(energy);
 			}
@@ -178,7 +178,7 @@ void how_to_play() {
 		" - Logical deduction\n\n"
 		"Losing the Game : \n"
 		"You lose if:\n"
-		" - Your energy reaches 0 % before solving the case\n"
+		" - Your energy reaches 0 % before solving the case and you will be forced to guess the murderer.\n"
 		" - You accuse the wrong suspect\n\n"
 		"Tips : \n"
 		" - Manage your energy level very carefully.\n"
