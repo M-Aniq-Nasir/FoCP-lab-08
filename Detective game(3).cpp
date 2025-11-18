@@ -200,7 +200,7 @@ void suspects_print() {
 		"5. Edward (Gardener) - Was once forced by Evan to bury an unknown dead body.\n"
 		"6. Victor Eldenwood (Brother of victim) - A drug addict who hates Evan because their parents always showed more care towards Evan and gave Evan all of their wealth.\n"
 		"7. Felix (Guest) - An old rival invited to solve the past disputes by Evan.\n"
-		"8. Martha Eldenwood (Sister of victim) - Was continuosly deprived of her share in propety by Evan.\n"
+		"8. Martha Eldenwood (Sister of victim) - Was continuosly deprived of her share in property by Evan.\n"
 		"9. Thomas (PA of victim) - Secretly loved Evan's sister and became furious due to Evan's wicked behaviour with her.\n"
 		"10. Brad (Brother-in-Law of victim) - Had many fights with Evan due to Evan's bad behaviour with his wife Martha.\n";
 	typetext(suspects, 40 + rand() % 10);
@@ -612,6 +612,7 @@ bool exit_game() {
 	return false;
 
 }
+
 
 
 
