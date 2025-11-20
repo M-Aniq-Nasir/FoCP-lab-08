@@ -464,11 +464,11 @@ void clue_sus(int murderer,int weapon) {
 	else if (suspect == 2) {
 		if (suspect == murderer) {
 			if (weapon == 1)typetext("You:Where were you at the time of murder?\nRegina: Arthur asked me to help slice onions, as I was cutting with the small kitchen knife he handed me so it was taking me a lot of time");
-			else typetext("You:Where were you at the time of murder?\nRegina: The laundry line snapped in the wind, so I was busy retying it with the rope I keep for emergencies.");
+			else if(weapon == 3) typetext("You:Where were you at the time of murder?\nRegina: The laundry line snapped in the wind, so I was busy retying it with the rope I keep for emergencies.");
 		}
 			
 		else {
-			typetext("");
+			typetext("I was washing the cloths. i was outside and didn't hear anything.");
 		}
 		}
 	else if (suspect == 3) {
