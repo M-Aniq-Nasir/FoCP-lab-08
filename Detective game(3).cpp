@@ -415,7 +415,7 @@ void clue_loc(int location,int loc_murder,int weapon) {
 	if (location == loc_murder) {
 		string message = "This seems to be the murder location.....\n..here,look! there is a ";
 		string weapon_print;
-		if (weapon == 1) string weapon_print = "Knife";
+		if (weapon == 1) weapon_print = "Knife";
 		else if (weapon == 2) weapon_print = "Wrench";
 		else if (weapon == 3) weapon_print = "Crowbar";
 		else if (weapon == 4) weapon_print = "Gun";
