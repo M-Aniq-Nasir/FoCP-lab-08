@@ -416,10 +416,10 @@ void clue_loc(int location,int loc_murder,int weapon) {
 		string message = "This seems to be the murder location.....\n..here,look! there is a ";
 		string weapon_print;
 		if (weapon == 1) string weapon_print = "Knife";
-		else if (weapon == 2) string weapon_print = "Wrench";
-		else if (weapon == 3) string weapon_print = "Crowbar";
-		else if (weapon == 4) string weapon_print = "Gun";
-		else if (weapon == 5) string weapon_print = "Torn rope";
+		else if (weapon == 2) weapon_print = "Wrench";
+		else if (weapon == 3) weapon_print = "Crowbar";
+		else if (weapon == 4) weapon_print = "Gun";
+		else if (weapon == 5) weapon_print = "Torn rope";
 		typetext(message);
 		typetext(weapon_print);
 		typetext(" on the ground,\nthe killer must have panicked,otherwise he would'nt have left it in the open.\nHe hid the body but couldn't hide the weapon in the time\n");
